@@ -1,0 +1,591 @@
+/* ---------- GENERAL ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #07070c;   /* Negro profundo */
+    color: #ffffff;              /* Blanco */
+    line-height: 1.6;
+}
+
+/* Los títulos usan la fuente Castoro Titling */
+h1, h2, h3, .logo {
+    font-family: "Castoro Titling", Georgia, serif;
+    letter-spacing: 1.5px;
+    font-weight: normal;
+}
+
+/* Las palabras dentro de <span> en los títulos van en Lila */
+h1 span, h2 span, h3 span, .logo span {
+    color: #c499ff;              /* Lila místico */
+}
+
+a {
+    text-decoration: none;
+}
+
+section {
+    padding: 75px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 38px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* ---------- MENÚ ---------- */
+header {
+    font-family: "Castoro Titling", Georgia, serif;
+    position: sticky;
+    top: 0;
+    background-color: #0b0d1a;   /* Negro azulado */
+    border-bottom: 2px solid #1f2b52; /* Borde azul */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px 30px;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 22px;
+    color: #ffffff;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+nav a {
+    color: #fcc4ff;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #c499ff;
+}
+
+/* ---------- BOTÓN Y VENTANITA FLOTANTE MI CARRITO ---------- */
+.carrito-dropdown {
+    position: relative;
+    margin-left: 10px;
+}
+
+.carrito-dropdown summary {
+    list-style: none;
+}
+
+.carrito-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.btn-mi-carrito {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #141b33;
+    color: #c499ff;
+    border: 2px solid #c499ff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.btn-mi-carrito svg {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-mi-carrito:hover,
+.carrito-dropdown[open] .btn-mi-carrito {
+    background-color: #c499ff;
+    color: #07070c;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(196, 153, 255, 0.35);
+}
+
+/* Ventanita emergente del carrito */
+.ventana-carrito {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    width: 340px;
+    background-color: #101528;
+    border: 2px solid #c499ff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+    z-index: 200;
+    animation: abrirVentana 0.2s ease-out;
+}
+
+.ventana-carrito::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 25px;
+    width: 12px;
+    height: 12px;
+    background-color: #101528;
+    border-left: 2px solid #c499ff;
+    border-top: 2px solid #c499ff;
+    transform: rotate(45deg);
+}
+
+@keyframes abrirVentana {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ventana-carrito h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #1f2b52;
+    padding-bottom: 6px;
+}
+
+#lista {
+    list-style: none;
+    margin-bottom: 15px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+#lista:empty::before {
+    content: "Tu carrito está vacío. ¡Agrega tu próxima lectura nocturna!";
+    color: #9ba6c9;
+    font-style: italic;
+    font-size: 13px;
+    display: block;
+    padding: 15px 10px;
+    text-align: center;
+    background-color: #07070c;
+    border-radius: 6px;
+    border: 1px dashed #1f2b52;
+}
+
+#lista li {
+    background-color: #07070c;
+    color: #edb3ff;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border-left: 4px solid #c499ff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.carrito-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 2px solid #1f2b52;
+}
+
+.carrito-total {
+    font-family: "Castoro Titling", Georgia, serif;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.carrito-total span {
+    color: #c499ff;
+}
+
+.btn-vaciar {
+    background-color: transparent;
+    color: #c499ff;
+    border: 1px solid #c499ff;
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-vaciar:hover {
+    background-color: #c499ff;
+    color: #07070c;
+}
+
+/* ---------- PORTADA ---------- */
+.portada {
+    max-width: none;
+    padding: 130px 30px;
+    background: radial-gradient(circle at center, rgba(20, 27, 51, 0.85), rgba(7, 7, 12, 0.96)),
+                url("img/portada.jpeg");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    border-bottom: 1px solid #1f2b52;
+}
+
+.portada h1 {
+    font-size: 56px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.portada p {
+    max-width: 650px;
+    margin: 0 auto 30px auto;
+    font-size: 18px;
+    color: #dbe2ff;
+}
+
+.boton {
+    display: inline-block;
+    background-color: #c499ff;
+    color: #07070c;
+    font-weight: bold;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.boton:hover {
+    background-color: #d8baff;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(196, 153, 255, 0.4);
+}
+
+/* ---------- TARJETAS DE LIBROS ---------- */
+.contenedor-tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.tarjeta {
+    width: 310px;
+    background-color: #10162b;   /* Azul profundo */
+    border: 2px solid #1f2b52;   /* Azul medio */
+    border-radius: 10px;
+    padding: 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    border: 1px solid #07070c;
+    background-color: #07070c;
+}
+
+.tarjeta h3 {
+    font-size: 21px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.datos {
+    color: #c499ff;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tarjeta p {
+    font-size: 14px;
+    color: #dbe2ff;
+    margin-bottom: 15px;
+}
+
+.precio {
+    font-family: "Castoro Titling", Georgia, serif;
+    font-size: 24px !important;
+    color: #c499ff !important;
+    margin-bottom: 12px !important;
+}
+
+.tarjeta:hover {
+    border-color: #c499ff;
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(196, 153, 255, 0.18);
+}
+
+/* ---------- BOTÓN DEL CARRITO EN LIBROS ---------- */
+.btn-carrito {
+    margin-top: auto;
+    width: 100%;
+    background-color: #c499ff;
+    color: #07070c;
+    border: none;
+    padding: 11px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
+}
+
+.tarjeta:hover .btn-carrito {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.btn-carrito:hover {
+    background-color: #e7caff;
+    color: #07070c;
+    transform: scale(1.02);
+}
+
+/* ---------- SOBRE NOSOTROS ---------- */
+.contenedor-nosotros {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    background-color: #10162b;
+    border: 2px solid #1f2b52;
+    border-radius: 12px;
+    padding: 35px;
+}
+
+.nosotros-texto {
+    flex: 1;
+    min-width: 280px;
+}
+
+.nosotros-texto h2 {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.nosotros-texto p {
+    color: #dbe2ff;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.miembros-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.miembro-tag {
+    background-color: #07070c;
+    border: 1px solid #c499ff;
+    color: #c499ff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.nosotros-imagen {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+}
+
+.nosotros-imagen img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 10px;
+    border: 2px solid #c499ff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- CONTACTO ---------- */
+.contenedor-contacto {
+    background-color: #10162b;
+    border: 2px solid #1f2b52;
+    border-radius: 12px;
+    padding: 40px 30px;
+    max-width: 750px;
+    margin: auto;
+}
+
+.contenedor-contacto p {
+    text-align: center;
+    color: #dbe2ff;
+    margin-bottom: 25px;
+}
+
+.formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formulario-contacto input,
+.formulario-contacto textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #07070c;
+    border: 1px solid #1f2b52;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+}
+
+.formulario-contacto input:focus,
+.formulario-contacto textarea:focus {
+    border-color: #c499ff;
+}
+
+/* ---------- NEWSLETTER ---------- */
+.seccion-newsletter {
+    background: linear-gradient(135deg, #182246, #281b42);
+    border: 2px solid #c499ff;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 50px 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.seccion-newsletter p {
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+    font-size: 17px;
+    color: #dbe2ff;
+}
+
+.formulario-newsletter {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.formulario-newsletter input {
+    padding: 14px 20px;
+    font-size: 15px;
+    background-color: #07070c;
+    color: #ffffff;
+    border: 2px solid #c499ff;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 350px;
+    outline: none;
+}
+
+/* ---------- PIE DE PÁGINA ---------- */
+.footer-real {
+    background-color: #05060b;
+    color: #dbe2ff;
+    border-top: 2px solid #1f2b52;
+    padding-top: 60px;
+}
+
+.footer-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px 40px 20px;
+}
+
+.footer-columna {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-columna .logo {
+    font-size: 22px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.footer-columna p {
+    font-size: 14px;
+    color: #9ba6c9;
+}
+
+.footer-columna h3 {
+    font-size: 20px;
+    margin-bottom: 18px;
+    color: #ffffff;
+}
+
+.footer-columna ul {
+    list-style: none;
+}
+
+.footer-columna ul li {
+    margin-bottom: 10px;
+}
+
+.footer-columna ul li a,
+.redes-sociales a {
+    color: #dbe2ff;
+    transition: color 0.3s;
+    font-size: 14px;
+}
+
+.footer-columna ul li a:hover,
+.redes-sociales a:hover {
+            color: #c499ff;
+}
+
+.redes-sociales {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 22px;
+    background-color: #030307;
+    border-top: 1px solid #141b33;
+    font-size: 13px;
+    color: #9ba6c9;
+}
